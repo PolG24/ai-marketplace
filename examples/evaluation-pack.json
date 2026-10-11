@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "id": "test-plan-evaluation",
+  "kind": "evaluation_pack",
+  "version": "1.0.0",
+  "owner": {"team": "software-quality", "contact": "software-quality@example.internal"},
+  "artifact": {
+    "uri": "https://artifactory.example.internal/ai-assets/test-plan-evaluation/1.0.0/evaluation.tar.gz",
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+  },
+  "execution": {"profile": "managed-evaluation"},
+  "permissions": [],
+  "data": {"classification": "public", "model_route": null},
+  "secret_refs": []
+}

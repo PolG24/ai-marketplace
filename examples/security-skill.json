@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "id": "security-triage",
+  "kind": "skill",
+  "version": "1.0.0",
+  "owner": {"team": "product-security", "contact": "product-security@example.internal"},
+  "artifact": {
+    "uri": "https://artifactory.example.internal/ai-assets/security-triage/1.0.0/skill.tar.gz",
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+  },
+  "execution": {"profile": "managed-skill"},
+  "permissions": [{"capability": "security.findings.read", "resources": ["project:platform"]}],
+  "data": {"classification": "internal", "model_route": "enterprise-default"},
+  "secret_refs": ["security-reader"]
+}

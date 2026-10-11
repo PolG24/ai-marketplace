@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "id": "jira-test-plan",
+  "kind": "agent",
+  "version": "1.0.0",
+  "owner": {"team": "software-quality", "contact": "software-quality@example.internal"},
+  "artifact": {
+    "uri": "https://artifactory.example.internal/ai-assets/jira-test-plan/1.0.0/agent.tar.gz",
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+  },
+  "execution": {"profile": "managed-agent"},
+  "permissions": [{"capability": "jira.issues.read", "resources": ["*"]}],
+  "data": {"classification": "internal", "model_route": "enterprise-default"},
+  "secret_refs": ["jira-reader"]
+}
