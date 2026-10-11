@@ -16,9 +16,11 @@ Engineering teams contribute and maintain assets. The platform team owns packagi
 | Security-triage skill | Instructions, references, and optional scripts help all teams assess findings and propose remediation. Loaded by a managed runner, not executed independently. | Preserve machine recommendations and human decisions separately; no automatic dismissal. |
 | Lab-instrument MCP server | Hardware engineers access bounded measurement and instrument operations. | Equipment authorization, exclusive access where needed, command limits, and independent physical interlocks. |
 | Simulation MCP server | Simulation engineers submit bounded jobs, retrieve results, and obtain summaries through a hosted AI workflow. | Compute/license budgets, job ownership, cancellation, and traceability to parameters and raw results. |
-| **Evaluation pack (additional type)** | Authors, QA, and reviewers reuse sanitized cases, expert-reviewed criteria, and scoring code to compare assets and detect regressions. | Review fixtures and scorer; version the benchmark and evaluation configuration. Passing is evidence, not a guarantee. |
+| **Evaluation pack** | Authors, QA, and reviewers share sanitized cases, expert-reviewed criteria, and scoring code as a common baseline across assets and versions. | Review fixtures and scorer; version the pack and evaluation configuration. Passing is evidence, not a guarantee. |
 
-An agent coordinates work; a skill supplies a procedure; an MCP server exposes capabilities. They can compose. For example, an agent loads a reviewed skill and calls approved MCP tools. Evaluation packs assess the resulting behavior across teams. Every executable component and dependency must belong to the approved release.
+An agent coordinates work; a skill supplies a procedure; an MCP server exposes capabilities. An agent can load a reviewed skill and call approved tools. Every executable component and dependency must belong to the approved release.
+
+Evaluations may live in an asset's package; publish shared packs separately when reuse or independent QA ownership helps. Jira test-plan agents can pin the same pack to compare coverage and invented requirements across agents and releases, adding local cases without weakening shared criteria. When a baseline changes, re-evaluate both current and candidate releases against it.
 
 <!-- pagebreak -->
 
@@ -75,7 +77,7 @@ Production profiles add compatibility, evaluations, network destinations, budget
 | Reuse | Repeat use and accepted outcomes across distinct teams; demonstrate benefit beyond the author's team. |
 | Cost and reliability | Cost per accepted result, latency, failures, and maintenance effort; track denied operations and incidents separately. |
 
-Pilot Jira test planning and read-only security triage across a few teams. Evaluate sanitized benchmarks and representative tasks; record model configuration and benchmark version. Agree quality thresholds with domain owners; treat time-saving targets as hypotheses. Use task-level aggregates, not developer rankings. Avoid collecting raw stories/prompts merely for analytics.
+Pilot Jira test planning and read-only security triage across a few teams. Evaluate sanitized benchmarks and representative tasks; record asset and pack versions, local cases, and model configuration. Agree quality thresholds with domain owners; treat time-saving targets as hypotheses. Use task-level aggregates, not developer rankings. Avoid collecting raw stories/prompts merely for analytics.
 
 Expand to instruments and simulation after validating domain controls. Keep assets with sustained benefit and active owners; improve fixable gaps; retire poor quality, excessive cost, unresolved risk, or unsupported releases. Shared evaluation packs enable repeatable comparisons; one benchmark cannot cover every domain.
 
