@@ -9,6 +9,20 @@ The proposal covers team contributions, managed execution, manifest policy, rele
 
 To regenerate the HTML, run `python3 scripts/render_design.py`. Print `docs/design.html` to PDF with A4 paper, 100% scale, and browser headers/footers disabled. Page layout is defined in the document's print stylesheet.
 
+## Presentation
+
+[Open the presentation](docs/presentation.html) · [Timed speaker notes](docs/presentation-notes.md)
+
+The deck has 18 speaking slides paced to 20 minutes and three appendix slides for questions. It explains the design decisions, their motivations and tradeoffs, with an architecture diagram, an illustrative engineer journey and a replay of real validator output. The HTML is self-contained, including embedded fonts, and works offline.
+
+Open the HTML in a browser. Use arrows or Space to navigate, **N** for speaker notes, **F** for fullscreen and **T** to start the rehearsal timer. **E** enables inline text editing; **Ctrl/Cmd+S** downloads an HTML copy with your edits. Text edits also autosave in that browser when local storage is available. Touchscreens support swiping.
+
+The demo buttons replay captured CLI output rather than executing Python. The actual demo commands are included in the speaker notes. Regenerate the deck and notes with `python3 scripts/render_presentation.py`; the renderer uses the local theme, embedded font cache in `.frontend-slides/fonts.css`, and the skill's fixed-stage CSS. Colors and typography are defined in `scripts/presentation_theme.css`.
+
+## Interview presentation skill
+
+The complete [Frontend Slides skill](.agents/skills/frontend-slides/SKILL.md) is included in this repository, with its styles, templates, and helper scripts. Ask your coding agent: "Use the frontend-slides skill to turn docs/design.md into a speaker-led interview presentation. Start with three visual style previews." See the [installation notes](.agents/skills/frontend-slides/UPSTREAM.md) for the upstream revision, license, and optional export/conversion dependencies.
+
 ## Try the manifest validator
 
 Requires Python 3.10+ and Pydantic v2. From the repository root, create a virtual environment and install the dependency:
