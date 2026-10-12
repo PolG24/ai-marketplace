@@ -28,17 +28,17 @@ Evaluations may live in an asset's package; publish shared packs separately when
 
 <!-- architecture -->
 
-**Publishing:** Bitbucket stores submissions and reviews. Jenkins builds artifacts and runs manifest checks, tests, evaluations, and applicable Black Duck/Polaris scans. Artifactory stores immutable artifacts and evidence; a platform-controlled gate promotes reviewed releases into the catalog. Confluence holds guides; Jira tracks reviews, incidents, and retirement. Failed or unavailable required checks block promotion.
+**Publishing:** Bitbucket stores submissions and reviews. Jenkins builds candidates into restricted Artifactory staging and runs manifest checks, tests, evaluations, and applicable Black Duck/Polaris scans. Only the platform promotion service can promote the exact reviewed artifact digest to the approved repository and activate its catalog entry. The portal lists approved catalog entries; uploads alone create no listing. Production runners cannot read staging. Confluence holds guides; Jira tracks reviews, incidents, and retirement. Failed or unavailable required checks block promotion.
 
-**Execution:** the catalog holds metadata and approvals, not engineering payloads. Corporate identity authenticates engineers; isolated runners execute pinned releases. Connectors enforce destinations, scopes, and budgets, using Vault credentials. Lab/simulation servers run near resources with equivalent controls. Network policy prevents connector bypass. MCP provides integration, not automatic safety; ordinary APIs are also supported.
+**Execution:** the catalog holds metadata and approvals, not engineering payloads. Corporate identity authenticates engineers; isolated runners check live approval and execute pinned releases. Connectors validate user and workload identity, enforce destinations, scopes, and budgets, and hold downstream Vault credentials. Lab/simulation servers run near resources with equivalent controls. Network policy prevents connector bypass. MCP provides integration, not automatic safety; ordinary APIs are also supported.
 
 ## 4. Engineer experience, access, and secrets
 
 1. **Discover:** search by task, domain, owner, compatibility, permitted data, and approval/evaluation evidence. Catalog visibility respects access restrictions.
 2. **Enable:** inspect permissions, examples, limitations, and support; enable an approved version in a managed workspace. This replaces local installation. Approved IDE clients may later connect remotely.
-3. **Run:** submit a Jira story ID. The connector checks access and supplies permitted content to the approved model route. Review the draft's acceptance-criteria references, assumptions, and gaps before adoption.
+3. **Run:** submit a Jira story ID. The connector checks access and supplies only required, permitted fields of that story to the approved model route. Review the draft's acceptance-criteria references, assumptions, and gaps before adoption.
 
-Effective access intersects **user rights, approved asset scope, and current policy**, including downstream authorization. Connectors check each sensitive operation. Prefer short-lived, scoped Vault credentials where supported; rotate static credentials separately. Keep credentials out of manifests, model context, and logs. Minimize/redact telemetry and limit retention. Resource content and model outputs are untrusted; prompts cannot override access checks.
+Effective access intersects **user rights, approved asset scope, current policy, and resources needed for the run**, including field and classification limits. Connectors check each sensitive operation and downstream authorization; a service account's broader rights never replace user checks. Resource owners approve connector scopes and credential mappings; manifest requests grant no access. Prefer delegated user access or short-lived, scoped Vault credentials where supported; rotate static credentials separately. Keep downstream credentials with connectors, out of asset packages, model context, and logs. Minimize/redact telemetry and limit retention. Resource content and model outputs are untrusted; prompts cannot override access checks.
 
 <!-- pagebreak -->
 
@@ -52,7 +52,7 @@ The versioned JSON manifest declares an asset's requirements; it is not approval
 | `owner` | Accountable team and support contact. Production checks ownership against corporate records. |
 | `artifact` | Immutable Artifactory reference and SHA-256 digest. Release evidence binds source revision and dependency inventory. |
 | `execution` | Managed execution profile. Skills and evaluation packs are consumed by a compatible managed runner. |
-| `permissions` | Named capabilities and explicit resource scopes; no blanket grants. Empty means no resource access. |
+| `permissions` | Requested capabilities and explicit resource scopes; no blanket grants. Empty means no resource access; declarations grant none. |
 | `data` | Maximum permitted classification and model-route alias, or no model use. Unknown classification does not imply permission. |
 | `secret_refs` | Logical connector credential references only, never secret values. Requests do not confer credential access. |
 
