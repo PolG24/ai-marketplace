@@ -19,7 +19,7 @@ slide("Challenge B / AI Marketplace", "Engineering AI Marketplace", 30, '''
 <h1 class="reveal" data-edit>Useful once.<br><span class="accent">Trusted across teams.</span></h1>
 <p class="subtitle reveal" data-edit>A marketplace for supported AI capabilities<br>across software, hardware and simulation.</p>
 <div class="title-line reveal"><span data-edit>Discover</span> → <span data-edit>Trust</span> → <span data-edit>Reuse</span></div>
-<div class="title-orbit" aria-hidden="true"><i></i><b>REUSE / 01</b></div>
+<div class="title-orbit" aria-hidden="true"><i></i></div>
 ''', [
 "Open with the design intent: teams already create useful AI helpers. The challenge is making those capabilities discoverable, credible and safe for someone outside the author’s team.",
 "This presentation follows the decisions from that problem to a usable service, then shows the working validator and how we would decide what deserves continued investment."
@@ -97,7 +97,7 @@ ARCHITECTURE = '''
 <path class="flow" d="M958 318H1020"/><rect class="trusted" x="1028" y="262" width="322" height="110"/><text class="d-title" x="1048" y="303">Managed connectors</text><text class="d-small" x="1048" y="340">Model gateway / MCP / APIs</text>
 <path class="flow" d="M1350 318H1412"/><rect class="box" x="1420" y="250" width="268" height="136"/><text class="d-title" x="1440" y="287">Resources</text><text class="d-small" x="1440" y="322">Models · Jira · findings</text><text class="d-small" x="1440" y="356">Labs · schedulers</text>
 <path class="flow" d="M1500 147V203H814V254"/><text class="d-label" x="980" y="194">APPROVED RELEASE ONLY</text>
-<rect class="trusted" x="1028" y="426" width="322" height="76"/><text class="d-title" x="1050" y="472">Vault</text><text class="d-small" x="1160" y="472">Scoped credentials</text><path class="flow dashed" d="M1189 426V380"/>
+<rect class="trusted" x="1028" y="426" width="322" height="76"/><text class="d-title" x="1050" y="472">Vault</text><text class="d-small" x="1130" y="472">Scoped credentials</text><path class="flow dashed" d="M1189 426V380"/>
 <rect class="box" x="328" y="426" width="630" height="76"/><text class="d-title" x="348" y="455">Audit + outcome telemetry</text><text class="d-small" x="348" y="485">Versions · decisions · quality · cost; redact payloads</text><path class="flow" d="M465 372V418"/><path class="flow" d="M814 372V418"/>
 </svg>'''
 
