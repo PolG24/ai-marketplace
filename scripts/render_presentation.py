@@ -3,6 +3,7 @@
 from html import escape
 from pathlib import Path
 import json
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 SLIDES = []
@@ -286,7 +287,10 @@ class SlidePresentation {
     this.slides = [...document.querySelectorAll('.slide')]; this.currentSlide = 0;
     this.stage = document.getElementById('deckStage'); this.notesOpen = false;
     this.editing = false; this.startTime = null; this.wheelTime = 0;
-    this.loadEdits(); this.setupStageScale(); this.setupNavigation(); this.setupEditing();
+    this.loadEdits();
+    // Remove obsolete section numbers from labels cached by earlier deck versions.
+    document.querySelectorAll('.eyebrow').forEach(el => { el.textContent = el.textContent.replace(/^\d{2} \/ /, ''); });
+    this.setupStageScale(); this.setupNavigation(); this.setupEditing();
     this.showSlide(this.hashIndex());
     window.addEventListener('hashchange', () => this.showSlide(this.hashIndex()));
     setInterval(() => this.updateTimer(), 1000);
@@ -380,11 +384,12 @@ def render():
     for i, s in enumerate(SLIDES):
         classes = "slide " + ("dark " if s["dark"] else "") + s["css"] + (" active visible" if i == 0 else "")
         heading = "" if s["css"] in ("title", "closing") else f'<h2 class="reveal" data-edit>{escape(s["title"])}</h2>'
+        topic_label = re.sub(r"^\d{2} / ", "", s["section"])
         number = f"A{i-17}" if s["appendix"] else f"{i+1:02d} / 18"
         takeaway = f'<div class="takeaway reveal">{s["takeaway"]}</div>' if s["takeaway"] else ""
         sections.append(f'''<!-- === SLIDE {i+1}: {escape(s['title'])} === -->
 <section class="{classes}" aria-label="{escape(s['title'])}" aria-hidden="{'false' if i == 0 else 'true'}">
-<p class="eyebrow reveal" data-edit>{escape(s['section'])}</p>{heading}
+<p class="eyebrow reveal" data-edit>{escape(topic_label)}</p>{heading}
 <div class="body">{s['body']}</div>{takeaway}
 <footer class="foot"><span>ENGINEERING AI MARKETPLACE</span><span>{number}</span></footer></section>''')
     data = json.dumps([{k: s[k] for k in ("title", "duration", "notes", "appendix")} for s in SLIDES]).replace("</", "<\\/")
