@@ -79,16 +79,18 @@ Production profiles add compatibility, evaluations, network destinations, budget
 
 Pilot Jira test planning and read-only security triage across a few teams. Evaluate sanitized benchmarks and representative tasks; record asset and pack versions, local cases, and model configuration. Agree quality thresholds with domain owners; treat time-saving targets as hypotheses. Use task-level aggregates, not developer rankings. Avoid collecting raw stories/prompts merely for analytics.
 
+**Adoption:** the platform team coordinates representatives, onboarding, Confluence links, demos, and targeted notices after catalog activation. Task, audience, prerequisite, and evidence metadata guide matching, which may be agentic: an agent uses authorized team profiles and stated needs to explain which teams could benefit, respecting catalog visibility. Owners review outreach recommendations; subscriptions and digests limit noise. Measure reach, trials, accepted results, and repeat cross-team use.
+
 Expand to instruments and simulation after validating domain controls. Keep assets with sustained benefit and active owners; improve fixable gaps; retire poor quality, excessive cost, unresolved risk, or unsupported releases. Shared evaluation packs enable repeatable comparisons; one benchmark cannot cover every domain.
 
 ## 8. Working piece: simple manifest validator
 
-Deliver a local Python CLI applying **structural checks plus an explicit pilot policy** to JSON. It needs no live integrations and never executes submissions or follows supplied URLs. Trusted policy is separate from the manifest.
+A local Python CLI checks **JSON structure and trusted pilot policy**, separate from the manifest. It needs no live integrations and never executes submissions or follows supplied URLs.
 
-- **Structure:** require the core fields above; enforce types, nonblank identifiers/ownership, supported schema and kinds, explicit versions, and an artifact reference/digest format. Reject unknown fields and duplicate JSON keys rather than silently ignoring them.
+- **Structure:** require core fields, correct types, nonblank identifiers/ownership, supported schema/kinds, explicit versions, and valid artifact references/digests. Reject unknown fields and duplicate JSON keys.
 - **Execution and access:** require a recognized managed profile, approved artifact location, and explicit resource scopes. The pilot policy permits only named read-only Jira and security-finding capabilities with configured scopes; reject wildcard grants and unsupported capabilities.
 - **Data and credentials:** accept only pilot-supported classifications and compatible model-route aliases. Reject unknown/restricted data, arbitrary model destinations, embedded credential fields, and unrecognized secret references. Detecting all secrets hidden in arbitrary strings is outside this check.
 - **Result:** return actionable field paths and error codes, with exit 0 for a valid manifest and nonzero for rejection or input failure. Do not label success as production approval.
-- **Tests/demo:** include valid Jira, security-skill, and evaluation-pack examples; test missing/wrong fields, malformed/duplicate JSON, broad access, unmanaged execution, invalid artifact references, prohibited data/model combinations, and embedded credentials. MCP permissions outside the pilot policy are rejected pending a future profile; the validator does not implement the rollout.
+- **Tests/demo:** include valid Jira, security-skill, and evaluation-pack manifests. Test missing/wrong fields, malformed/duplicate JSON, broad access, unmanaged execution, invalid artifacts, prohibited data/model combinations, and embedded credentials. Reject MCP permissions outside pilot policy pending future profiles.
 
 **Limits and tradeoffs:** static validation cannot verify artifact contents, truthful declarations, user access, scan authenticity, or AI quality. Promotion and runtime controls supply those checks. Central execution enables enforcement/revocation but adds availability and operating costs; sensitive operations fail closed if authorization or approval is unavailable. The demo implements validation, not the portal or runtime.
